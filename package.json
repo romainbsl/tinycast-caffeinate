@@ -1,0 +1,145 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "tinycast-caffeinate",
+  "title": "Caffeinate",
+  "description": "Keep your Mac awake with caffeinate: display off, system only, or while a process runs.",
+  "icon": "icon.png",
+  "author": "romainbsl",
+  "categories": [
+    "System"
+  ],
+  "platforms": [
+    "macOS"
+  ],
+  "license": "MIT",
+  "private": true,
+  "commands": [
+    {
+      "name": "caffeinate-display-off",
+      "title": "Caffeinate — Display Off",
+      "subtitle": "Caffeinate",
+      "description": "Keeps the Mac awake and turns the display off right away.",
+      "mode": "no-view",
+      "keywords": [
+        "display off",
+        "screen off",
+        "sleep display",
+        "keep awake"
+      ],
+      "arguments": [
+        {
+          "name": "duration",
+          "type": "text",
+          "placeholder": "Duration (30m, 1h30…), empty = unlimited",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "caffeinate-system",
+      "title": "Caffeinate — Keep Awake",
+      "subtitle": "Caffeinate",
+      "description": "Prevents system sleep; the display follows its usual settings.",
+      "mode": "no-view",
+      "keywords": [
+        "keep awake",
+        "prevent sleep",
+        "insomnia"
+      ],
+      "arguments": [
+        {
+          "name": "duration",
+          "type": "text",
+          "placeholder": "Duration (30m, 1h30…), empty = unlimited",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "caffeinate-while",
+      "title": "Caffeinate — While Process Runs",
+      "subtitle": "Caffeinate",
+      "description": "Keeps the Mac awake while a process picked from the list runs.",
+      "mode": "view",
+      "keywords": [
+        "wait",
+        "process",
+        "pid",
+        "build"
+      ]
+    },
+    {
+      "name": "stop",
+      "title": "Stop Caffeinate",
+      "subtitle": "Caffeinate",
+      "description": "Stops the caffeinate session started by this extension.",
+      "mode": "no-view",
+      "keywords": [
+        "stop",
+        "decaffeinate",
+        "off"
+      ]
+    },
+    {
+      "name": "menu-bar",
+      "title": "Caffeinate — Menu Bar",
+      "subtitle": "Caffeinate",
+      "description": "Shows caffeinate's status in the menu bar and lets you control it.",
+      "mode": "menu-bar",
+      "interval": "10s",
+      "keywords": [
+        "status",
+        "menu bar"
+      ]
+    }
+  ],
+  "preferences": [
+    {
+      "name": "preventIdleSleep",
+      "type": "checkbox",
+      "title": "caffeinate Flags",
+      "label": "-i: prevent idle system sleep",
+      "description": "If all three are unchecked, caffeinate applies -i by default.",
+      "default": true,
+      "required": false
+    },
+    {
+      "name": "preventSystemSleepOnAC",
+      "type": "checkbox",
+      "label": "-s: prevent system sleep on AC power (even with the lid closed)",
+      "default": true,
+      "required": false
+    },
+    {
+      "name": "preventDiskSleep",
+      "type": "checkbox",
+      "label": "-m: prevent disk idle sleep",
+      "default": true,
+      "required": false
+    },
+    {
+      "name": "displayOffDelay",
+      "type": "textfield",
+      "title": "Display Off Delay",
+      "description": "Seconds to wait before `pmset displaysleepnow`, so that releasing the Return key does not wake the display again (0 to 30).",
+      "default": "1",
+      "placeholder": "1",
+      "required": false
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^2.1.2"
+  },
+  "scripts": {
+    "build": "ray build -e dist -o build",
+    "test": "tsx --test test/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "check": "npm test && npm run typecheck"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}
